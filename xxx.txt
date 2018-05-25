@@ -1,0 +1,14 @@
+/* ide-helper */
+composer require barryvdh/laravel-ide-helper
+php artisan vendor:publish --provider="Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider" --tag=config
+config\ide-helper.php : ['include_fluent' => true]
+php artisan ide-helper:generate
+php artisan ide-helper:meta
+
+/* debagbar */
+composer require --dev barryvdh/laravel-debugbar
+
+/* yarn */
+yarn install
+Added public/build in .gitignore
+Changed webpack.mix.js
