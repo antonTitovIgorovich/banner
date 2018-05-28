@@ -12,3 +12,6 @@ composer require --dev barryvdh/laravel-debugbar
 yarn install
 Added public/build in .gitignore
 Changed webpack.mix.js
+
+/* docker */
+Added Makefile in project
