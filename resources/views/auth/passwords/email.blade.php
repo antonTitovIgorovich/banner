@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('password_reset') !!}
+@endsection
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -7,11 +11,6 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
