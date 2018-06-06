@@ -4,15 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\Request;
 use App\Entity\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-
     use ThrottlesLogins;
 
     public function __construct()
@@ -32,23 +31,24 @@ class LoginController extends Controller
             $this->sendLockoutResponse($request);
         }
 
-        $aunthenticate = Auth::attempt([
+        $authenticate = Auth::attempt(
             $request->only(['email', 'password']),
             $request->filled('remember')
-        ]);
+        );
 
-        if ($aunthenticate) {
+        if ($authenticate) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
             $user = Auth::user();
-            if (!$user->status !== User::STATUS_ACTIVE) {
+            if ($user->status !== User::STATUS_ACTIVE) {
                 Auth::logout();
-                return back()->with('error', 'You need to confirm your account. Please check email.');
+                return back()->with('error', 'You need to confirm your account. Please check your email.');
             }
             return redirect()->intended(route('cabinet'));
         }
 
         $this->incrementLoginAttempts($request);
+
         throw ValidationException::withMessages(['email' => [trans('auth.failed')]]);
     }
 
@@ -61,6 +61,6 @@ class LoginController extends Controller
 
     protected function username()
     {
-        return 'name';
+        return 'email';
     }
 }

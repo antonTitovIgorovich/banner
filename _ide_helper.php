@@ -1613,7 +1613,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \App\Entity\User|null
          * @static 
          */ 
         public static function user()
@@ -13069,9 +13069,7 @@ namespace DaveJamesMiller\Breadcrumbs\Facades {
          * @param string $name The name of the page.
          * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
          *     accept additional parameters.
-         * @return void 
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
-         *     used.
+         * @return void
          * @static 
          */ 
         public static function register($name, $callback)
