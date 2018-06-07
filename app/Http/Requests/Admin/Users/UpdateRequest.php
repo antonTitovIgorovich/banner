@@ -16,7 +16,6 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
-
     public function rules()
     {
         return [
