@@ -3,36 +3,25 @@
 namespace App\Http\Requests\Admin\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use App\Entity\User;
 
+/**
+ * @property User $user
+ */
 class UpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email|unique:users,id,' . $this->user->id,
-            'status' => ['required', 'string', Rule::in(
-                [
-                    User::STATUS_ACTIVE,
-                    User::STATUS_WAIT
-                ])],
+            'email' => 'required|string|max:255|email|unique:users,id,' . $this->user->id
         ];
     }
 }
