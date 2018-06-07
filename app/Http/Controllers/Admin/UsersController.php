@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entity\User;
 use App\Http\Controllers\Controller;
+use App\UseCases\Auth\RegisterService;
 use Illuminate\Support\Str;
 use App\Http\Requests\Admin\Users\{
     CreateRequest, UpdateRequest
@@ -12,6 +13,12 @@ use App\Http\Requests\Admin\Users\{
 
 class UsersController extends Controller
 {
+    private $service;
+
+    public function __construct(RegisterService $service)
+    {
+        $this->service = $service;
+    }
 
     public function index()
     {
@@ -58,7 +65,7 @@ class UsersController extends Controller
 
     public function verify(User $user)
     {
-        $user->verify();
+        $this->service->verify($user->id);
         return redirect()->route('admin.users.show', $user);
     }
 }

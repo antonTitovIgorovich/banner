@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
     public static function register(string $name, string $email, string $password): self
