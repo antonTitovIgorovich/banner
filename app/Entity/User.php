@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string $verify_token
  * @property string $status
  */
 class User extends Authenticatable
