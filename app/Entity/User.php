@@ -20,7 +20,7 @@ class User extends Authenticatable
     const STATUS_WAIT = 'wait';
 
     protected $fillable = [
-        'name', 'email', 'password', 'status'
+        'name', 'email', 'password', 'verify_token', 'status'
     ];
 
     protected $hidden = [
