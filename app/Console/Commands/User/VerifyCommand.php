@@ -8,18 +8,8 @@ use App\Entity\User;
 
 class VerifyCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'user:verify {email}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Verify user email';
 
     protected $service;

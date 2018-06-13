@@ -19,9 +19,11 @@ class User extends Authenticatable
 
     const STATUS_ACTIVE = 'active';
     const STATUS_WAIT = 'wait';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
 
     protected $fillable = [
-        'name', 'email', 'password', 'verify_token', 'status'
+        'name', 'email', 'password', 'verify_token', 'status', 'role'
     ];
 
     protected $hidden = [
@@ -51,7 +53,7 @@ class User extends Authenticatable
 
     public function verify()
     {
-        if (!$this->isWait()){
+        if (!$this->isWait()) {
             throw new \DomainException('User is already verified.');
         }
 
@@ -69,5 +71,24 @@ class User extends Authenticatable
     public function isWait(): bool
     {
         return $this->status === self::STATUS_WAIT;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function changeRole(string $role): void
+    {
+        if (!\in_array($role, [self::ROLE_ADMIN, self::ROLE_USER], true)) {
+            throw new \InvalidArgumentException('Undefined role"' . $role . '"');
+        }
+        if ($this->role === $role) {
+            throw new \DomainException('Role is already assigned.');
+        }
+        $this->update(['role' => $role]);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 }

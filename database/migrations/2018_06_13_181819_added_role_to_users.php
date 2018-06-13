@@ -1,29 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 use App\Entity\User;
 
-class AddUserVerification extends Migration
+class AddedRoleToUsers extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('status', 16);
-            $table->string('verify_token')->nullable()->unique();
+            $table->string('role');
         });
 
-        DB::table('users')->update(['status' => User::STATUS_ACTIVE]);
+        DB::table('users')->update([
+            'role' => User::ROLE_USER,
+        ]);
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('status');
-            $table->dropColumn('verify_token');
+            $table->dropColumn('role');
         });
     }
 }
