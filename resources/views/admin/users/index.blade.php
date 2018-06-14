@@ -3,7 +3,66 @@
 @section('content')
     @include('admin.users._nav')
 
-    <a href="{{ route('admin.users.create') }}" class="btn btn-success">Add User</a>
+    <div class="card mb-3">
+        <div class="card-header">Filter</div>
+        <div class="card-body">
+            <form action="?" method="GET">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">ID</label>
+                            <input id="id" class="form-control" name="id" value="{{ request('id')}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Name</label>
+                            <input id="name" class="form-control" name="name" value="{{ request('name')}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input id="email" class="form-control" name="email" value="{{ request('email')}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="status" class="col-form-label">Status</label>
+                            <select id="status" class="form-control" name="status">
+                                <option value=""></option>
+                                @foreach($statuses as $value => $label)
+                                    <option value="{{ $value }}"{{ $value === request('status') ? ' selected' : ''}}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="role" class="col-form-label">Roles</label>
+                            <select id="role" class="form-control" name="role">
+                                <option value=""></option>
+                                @foreach($roles as $value => $label)
+                                    <option value="{{ $value }}"{{ $value === request('role') ? ' selected' : ''}}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="col-form-label">&nbsp;</label><br>
+                            <button type="submit" class="btn btn-primary">Искать</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Add User</a></p>
 
     <table class="table table-bordered table-striped mt-3">
         <thead>
@@ -12,6 +71,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Role</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +87,13 @@
                     @endif
                     @if($user->isActive())
                         <span class="badge badge-primary">Active</span>
+                    @endif
+                </td>
+                <td>
+                    @if($user->isAdmin())
+                        <span class="badge badge-danger">Admin</span>
+                    @else
+                        <span class="badge badge-secondary">User</span>
                     @endif
                 </td>
             </tr>

@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
  * @property string $name
  * @property string $email
  * @property string $verify_token
+ * @property string $role
  * @property string $status
  */
 class User extends Authenticatable
@@ -63,19 +64,6 @@ class User extends Authenticatable
         ]);
     }
 
-    public function isActive(): bool
-    {
-        return $this->status === self::STATUS_ACTIVE;
-    }
-
-    public function isWait(): bool
-    {
-        return $this->status === self::STATUS_WAIT;
-    }
-
-    /**
-     * @param string $role
-     */
     public function changeRole(string $role): void
     {
         if (!\in_array($role, [self::ROLE_ADMIN, self::ROLE_USER], true)) {
@@ -90,5 +78,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function isWait(): bool
+    {
+        return $this->status === self::STATUS_WAIT;
     }
 }
