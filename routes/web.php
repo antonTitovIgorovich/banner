@@ -19,8 +19,14 @@ Route::group(
         'middleware' => ['auth', 'can:admin-panel'],
     ],
     function () {
+
         Route::get('/', 'HomeController@index')->name('home');
+
+        /** admin.users */
         Route::post('/users/{user}/verify', 'UsersController@verify')->name('users.verify');
         Route::resource('users', 'UsersController');
+
+        /** admin.regions */
+        Route::resource('regions', 'RegionsController');
     });
 
