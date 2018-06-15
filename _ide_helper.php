@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.22 on 2018-05-29 20:17:30.
+ * Generated for Laravel 5.6.22 on 2018-06-15 18:45:49.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1613,7 +1613,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\Entity\User|null
+         * @return \App\Entity\User|null 
          * @static 
          */ 
         public static function user()
@@ -1648,7 +1648,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\User|false 
+         * @return \App\Entity\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1712,7 +1712,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User|false 
+         * @return \App\Entity\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1774,7 +1774,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \App\Entity\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1876,7 +1876,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Entity\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1922,7 +1922,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \App\User 
+         * @return \App\Entity\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -13069,7 +13069,9 @@ namespace DaveJamesMiller\Breadcrumbs\Facades {
          * @param string $name The name of the page.
          * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
          *     accept additional parameters.
-         * @return void
+         * @return void 
+         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
+         *     used.
          * @static 
          */ 
         public static function register($name, $callback)
