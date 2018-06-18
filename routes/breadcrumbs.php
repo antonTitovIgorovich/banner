@@ -40,9 +40,7 @@ Breadcrumbs::register('admin.home', function (Crumbs $crumbs) {
     $crumbs->push('Admin', route('admin.home'));
 });
 
-/**
- * Users breadcrumbs
- */
+/** Users */
 
 Breadcrumbs::register('admin.users.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
@@ -64,9 +62,7 @@ Breadcrumbs::register('admin.users.edit', function (Crumbs $crumbs, User $user) 
     $crumbs->push('Edit', route('admin.users.index', $user));
 });
 
-/**
- * Regions breadcrumbs
- */
+/** Regions */
 
 Breadcrumbs::register('admin.regions.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
@@ -93,9 +89,7 @@ Breadcrumbs::register('admin.regions.edit', function (Crumbs $crumbs, Region $re
 });
 
 
-/**
- * Adverts Categories breadcrumbs
- */
+/** Adverts Categories */
 
 Breadcrumbs::register('admin.adverts.categories.index', function (Crumbs $crumbs) {
     $crumbs->parent('admin.home');
