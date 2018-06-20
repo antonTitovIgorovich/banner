@@ -38,7 +38,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return view('admin.adverts.categories.show', compact('category'));
+        $attributes = $category->attributes()->orderBy('sort')->get();
+        return view('admin.adverts.categories.show', compact('category', 'attributes'));
     }
 
     public function edit(Category $category)

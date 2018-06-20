@@ -10,7 +10,7 @@
         <tr>
             <th>Name</th>
             <th>Slug</th>
-            <th></th>
+            <th>Sort</th>
         </tr>
         </thead>
         <tbody>
