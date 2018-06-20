@@ -4,6 +4,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+$fa-font-path: "fonts/" !global;
+// Font-Awesome
+@import '~font-awesome/scss/font-awesome.scss';
+
 .navbar{
   background-color: #4b65ff;
   padding: 0.35rem 1rem;
