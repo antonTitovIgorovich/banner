@@ -33,7 +33,7 @@ class Category extends Model
 
     public function allAttributes(): array
     {
-        return $this->parentAttributes() + $this->attributes()->orderBy('sort')->getModels();
+        return array_merge($this->parentAttributes(), $this->attributes()->orderBy('sort')->getModels());
     }
 
     public function attributes()

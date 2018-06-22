@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Admin\Adverts;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Adverts\AttributeRequest;
 use App\Http\Controllers\Controller;
 use App\Entity\Advert\Category;
 
 class CategoryController extends Controller
 {
+    protected $categories;
+
+    public function __construct()
+    {
+        $this->categories = Category::defaultOrder()->withDepth()->get();
+    }
+
     public function index()
     {
-        $categories = Category::defaultOrder()->withDepth()->get();
-        return view('admin.adverts.categories.index', compact('categories'));
+        return view('admin.adverts.categories.index', ['categories' => $this->categories]);
     }
 
     public function create()
     {
-        $parents = Category::defaultOrder()->withDepth()->get();
-        return view('admin.adverts.categories.create', compact('parents'));
+        return view('admin.adverts.categories.create', ['parents' => $this->categories]);
     }
 
-    public function store(Request $request)
+    public function store(AttributeRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'parent' => 'nullable|integer|exists:advert_categories,id',
-        ]);
         $category = Category::create([
             'name' => $request['name'],
             'slug' => $request['slug'],
@@ -35,26 +35,22 @@ class CategoryController extends Controller
         return redirect()->route('admin.adverts.categories.show', $category);
     }
 
-
     public function show(Category $category)
     {
+        $parentAttributes = $category->parentAttributes();
         $attributes = $category->attributes()->orderBy('sort')->get();
-        return view('admin.adverts.categories.show', compact('category', 'attributes'));
+
+        return view('admin.adverts.categories.show', compact('category', 'attributes', 'parentAttributes'));
     }
 
     public function edit(Category $category)
     {
-        $parents = Category::defaultOrder()->withDepth()->get();
+        $parents = $this->categories;
         return view('admin.adverts.categories.edit', compact('category', 'parents'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(AttributeRequest $request, Category $category)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'parent' => 'nullable|integer|exists:advert_categories,id',
-        ]);
         $category->update([
             'name' => $request['name'],
             'slug' => $request['slug'],
@@ -96,5 +92,4 @@ class CategoryController extends Controller
         }
         return redirect()->route('admin.adverts.categories.index');
     }
-
 }

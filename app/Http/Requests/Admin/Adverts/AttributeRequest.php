@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin\Adverts;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Entity\Advert\Attribute;
 
-class RegisterRequest extends FormRequest
+
+class AttributeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +28,10 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email'=> 'required|string|email|max:255|unique:users',
-            'password'=> 'required|string|min:6|confirmed',
+            'type' => ['required', 'string', 'max:255', Rule::in(array_keys(Attribute::typesList()))],
+            'required' => 'nullable|string|max:255',
+            'variants' => 'nullable|string',
+            'sort' => 'required|integer',
         ];
     }
 }

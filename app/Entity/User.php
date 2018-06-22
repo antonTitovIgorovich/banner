@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
  * @property string $verify_token
  * @property string $role
  * @property string $status
+ * @property string $password
  */
 class User extends Authenticatable
 {
@@ -38,6 +39,7 @@ class User extends Authenticatable
             'email' => $email,
             'password' => bcrypt($password),
             'verify_token' => Str::uuid(),
+            'role' => self::ROLE_USER,
             'status' => self::STATUS_WAIT
         ]);
     }
@@ -48,6 +50,7 @@ class User extends Authenticatable
             'name' => $name,
             'email' => $email,
             'password' => bcrypt(Str::random()),
+            'role' => self::ROLE_USER,
             'status' => self::STATUS_ACTIVE
         ]);
     }

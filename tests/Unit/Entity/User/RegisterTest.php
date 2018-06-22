@@ -23,7 +23,7 @@ class RegisterTest extends TestCase
         self::assertEquals($name, $user->name);
         self::assertEquals($email, $user->email);
 
-        self::assertNotEmpty($password);
+        self::assertNotEquals($password, $user->password);
 
         self::assertTrue($user->isWait());
         self::assertFalse($user->isActive());
