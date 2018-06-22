@@ -29,6 +29,5 @@
         <env name="SESSION_DRIVER" value="redis"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
-        <!--<env name="DB_DATABASE" value="banner_test"/>-->
     </php>
 </phpunit>
