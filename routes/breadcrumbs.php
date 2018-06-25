@@ -122,10 +122,12 @@ Breadcrumbs::register('admin.adverts.categories.attributes.create', function (Cr
     $crumbs->parent('admin.adverts.categories.show', $category);
     $crumbs->push('Create', route('admin.adverts.categories.attributes.create', $category));
 });
+
 Breadcrumbs::register('admin.adverts.categories.attributes.show', function (Crumbs $crumbs, Category $category, Attribute $attribute) {
     $crumbs->parent('admin.adverts.categories.show', $category);
     $crumbs->push($attribute->name, route('admin.adverts.categories.attributes.show', [$category, $attribute]));
 });
+
 Breadcrumbs::register('admin.adverts.categories.attributes.edit', function (Crumbs $crumbs, Category $category, Attribute $attribute) {
     $crumbs->parent('admin.adverts.categories.attributes.show', $category, $attribute);
     $crumbs->push('Edit', route('admin.adverts.categories.attributes.edit', [$category, $attribute]));
@@ -137,6 +139,17 @@ Breadcrumbs::register('cabinet.home', function (Crumbs $crumbs) {
     $crumbs->parent('home');
     $crumbs->push('Cabinet', route('cabinet.home'));
 });
+
+Breadcrumbs::register('cabinet.profile.home', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Profile', route('cabinet.profile.home'));
+});
+
+Breadcrumbs::register('cabinet.profile.edit', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.profile.home');
+    $crumbs->push('Edit', route('cabinet.profile.edit'));
+});
+
 
 
 
