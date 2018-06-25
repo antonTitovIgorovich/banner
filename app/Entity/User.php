@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 /**
  * @property int $id
  * @property string $name
+ * @property string $last_name
  * @property string $email
  * @property string $verify_token
  * @property string $role
@@ -25,7 +26,7 @@ class User extends Authenticatable
     const ROLE_USER = 'user';
 
     protected $fillable = [
-        'name', 'email', 'password', 'verify_token', 'status', 'role'
+        'name', 'last_name', 'email', 'password', 'verify_token', 'status', 'role'
     ];
 
     protected $hidden = [

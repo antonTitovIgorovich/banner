@@ -131,6 +131,12 @@ Breadcrumbs::register('admin.adverts.categories.attributes.edit', function (Crum
     $crumbs->push('Edit', route('admin.adverts.categories.attributes.edit', [$category, $attribute]));
 });
 
+/** Cabinet */
+
+Breadcrumbs::register('cabinet.home', function (Crumbs $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push('Cabinet', route('cabinet.home'));
+});
 
 
 

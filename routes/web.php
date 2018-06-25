@@ -9,7 +9,15 @@ Auth::routes();
 
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
-Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+Route::group([
+    'prefix' => 'cabinet',
+    'as' => 'cabinet.',
+    'namespace' => 'Cabinet',
+    'middleware' => ['auth']
+],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home');
+    });
 
 Route::group(
     [
