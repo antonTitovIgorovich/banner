@@ -13070,7 +13070,6 @@ namespace DaveJamesMiller\Breadcrumbs\Facades {
          * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
          *     accept additional parameters.
          * @return void 
-         * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
          *     used.
          * @static 
          */ 
