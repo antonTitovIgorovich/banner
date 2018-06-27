@@ -7,9 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Entity\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Services\SmsSender;
 
 class PhoneController extends Controller
 {
+    private $sms;
+
+    public function __construct(SmsSender $sms)
+    {
+        $this->sms = $sms;
+    }
+
     public function request(Request $request)
     {
         /** @var User $user */
@@ -17,16 +25,17 @@ class PhoneController extends Controller
 
         try {
             $token = $user->requestPhoneVerification(Carbon::now());
+            $this->sms->send($user->phone, 'Phone verification token: ' . $token);
         } catch (\DomainException $e) {
             $request->session()->flash('error', $e->getMessage());
         }
+
         return redirect()->route('cabinet.profile.phone');
     }
 
     public function form()
     {
-        $user = Auth::user();
-        return view('cabinet.profile.home', compact('user'));
+        return view('cabinet.profile.phone');
     }
 
     public function verify(Request $request)
@@ -35,6 +44,7 @@ class PhoneController extends Controller
             'token' => 'required|string|max:255',
         ]);
 
+        /** @var User $user */
         $user = Auth::user();
 
         try {

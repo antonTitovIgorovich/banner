@@ -25,15 +25,14 @@ class ProfileController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255|regex:/^d+$/s'
+            'phone' => 'required|string|max:255|regex:/^[0-9]+$/s'
         ]);
 
         $user = Auth::user();
 
         $oldPhone = $user->phone;
 
-        $user->update($request->only('name', 'last_name', 'phone'));
-
+        $result = $user->update($request->only('name', 'last_name', 'phone'));
         if ($user->phone !== $oldPhone) {
             $user->unverifyPhone();
         }

@@ -150,6 +150,10 @@ Breadcrumbs::register('cabinet.profile.edit', function (Crumbs $crumbs) {
     $crumbs->push('Edit', route('cabinet.profile.edit'));
 });
 
+Breadcrumbs::register('cabinet.profile.phone', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.profile.home');
+    $crumbs->push('Phone', route('cabinet.profile.phone'));
+});
 
 
 

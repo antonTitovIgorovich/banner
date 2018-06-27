@@ -22,7 +22,7 @@
             <td>{{ $user->email }}</td>
         </tr>
         <tr>
-            <ht>Phone</ht>
+            <th>Phone</th>
             <td>
                 @if ($user->phone)
                     {{ $user->phone }}
