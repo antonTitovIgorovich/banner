@@ -44,10 +44,8 @@ class SmsServiceProvider extends ServiceProvider
     {
         $params = $this->config['drivers']['sms'];
 
-        if (!empty($params['url'])) {
-            return new Sms($params['api_id'], $params['url']);
-        }
-
-        return new Sms($params['api_id']);
+        return !empty($params['url']) ?
+            new Sms($params['api_id'], $params['url']) :
+            new Sms($params['api_id']);
     }
 }

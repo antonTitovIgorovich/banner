@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Cabinet\Adverts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\FilledProfile;
 
 class AdvertsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(FilledProfile::class);
+    }
+
     public function index()
     {
         return view('cabinet.adverts.index');
