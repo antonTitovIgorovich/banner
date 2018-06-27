@@ -96,6 +96,8 @@ class LoginController extends Controller
         }
 
         $this->incrementLoginAttempts($request);
+
+        throw ValidationException::withMessages(['token' => ['Invalid auth token']]);
     }
 
     public function logout(Request $request)
@@ -110,7 +112,7 @@ class LoginController extends Controller
         return view('auth.phone');
     }
 
-    protected function  username()
+    protected function username()
     {
         return 'email';
     }

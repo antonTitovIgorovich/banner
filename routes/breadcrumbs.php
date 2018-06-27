@@ -16,6 +16,11 @@ Breadcrumbs::register('login', function (Crumbs $crumbs) {
     $crumbs->push('Login', route('login'));
 });
 
+Breadcrumbs::register('login.phone', function (Crumbs $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push('Login', route('login.phone'));
+});
+
 Breadcrumbs::register('register', function (Crumbs $crumbs) {
     $crumbs->parent('home');
     $crumbs->push('Register', route('register'));
@@ -155,6 +160,12 @@ Breadcrumbs::register('cabinet.profile.phone', function (Crumbs $crumbs) {
     $crumbs->push('Phone', route('cabinet.profile.phone'));
 });
 
+/** Cabinet Adverts */
+
+Breadcrumbs::register('cabinet.adverts.index', function (Crumbs $crumbs) {
+    $crumbs->parent('cabinet.home');
+    $crumbs->push('Adverts', route('cabinet.adverts.index'));
+});
 
 
 
