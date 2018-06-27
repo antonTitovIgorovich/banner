@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
  * @property string $last_name
  * @property string $email
  * @property string $phone
+ * @property bool $phone_auth
  * @property bool $phone_verified
  * @property string $verify_token
  * @property string $phone_verify_token
@@ -41,6 +42,7 @@ class User extends Authenticatable
         'phone_verified',
         'phone_verify_token',
         'phone_verify_token_expire',
+        'phone_auth',
     ];
 
     protected $hidden = [
@@ -50,6 +52,7 @@ class User extends Authenticatable
     protected $casts = [
         'phone_verified' => 'boolean',
         'phone_verify_token_expire' => 'datetime',
+        'phone_auth' => 'boolean',
     ];
 
     public static function register(string $name, string $email, string $password): self
@@ -141,6 +144,26 @@ class User extends Authenticatable
         $this->saveOrFail();
     }
 
+    public function disablePhoneAuth()
+    {
+        $this->phone_auth = false;
+        $this->saveOrFail();
+    }
+
+    public function enablePhoneAuth()
+    {
+        if (!empty($this->phone) && !$this->isPhoneVerified()) {
+            throw new \DomainException('Phone number is empty.');
+        }
+        $this->phone_auth = true;
+        $this->saveOrFail();
+    }
+
+    public function isPhoneAuthEnabled(): bool
+    {
+        return $this->phone_auth;
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
@@ -158,6 +181,6 @@ class User extends Authenticatable
 
     public function isPhoneVerified(): bool
     {
-        return $this->phone_verified;
+        return (bool)$this->phone_verified;
     }
 }

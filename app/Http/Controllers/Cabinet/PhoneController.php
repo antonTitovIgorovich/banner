@@ -55,4 +55,17 @@ class PhoneController extends Controller
 
         return redirect()->route('cabinet.profile.home');
     }
+
+    public function auth()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        if ($user->isPhoneAuthEnabled()) {
+            $user->disablePhoneAuth();
+        } else {
+            $user->enablePhoneAuth();
+        }
+
+        return redirect()->route('cabinet.profile.home');
+    }
 }
