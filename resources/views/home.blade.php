@@ -44,4 +44,15 @@
         </div>
     </div>
 
+    @foreach($adverts as $advert)
+        <div class="card col-12">
+            <div class="card-body">
+                <h5 class="card-title">{{$advert->title}}</h5>
+                <h6 class="card-subtitle">{{$advert->price}}</h6>
+                <p class="card-text">{{str_limit($advert->content, 20)}}</p>
+                <a href="{{ route('adverts.show', $advert) }}" class="btn btn-primary">Show</a>
+            </div>
+        </div>
+    @endforeach
+
 @endsection

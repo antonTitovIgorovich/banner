@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Category $category
  * @property Value[] $values
  * @property Photo[] $photos
- * @method Builder active()
+ * @method Builder static active()
  * @method Builder forUser(User $user)
  */
 class Advert extends Model

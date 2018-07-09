@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Entity\Region;
 use App\Entity\Adverts\Category;
+use App\Entity\Adverts\Advert\Advert;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,8 @@ class HomeController extends Controller
 
         $categories = Category::whereIsRoot()->defaultOrder()->getModels();
 
-        return view('home', compact('regions', 'categories'));
+        $adverts = Advert::active()->getModels();
+
+        return view('home', compact('regions', 'categories', 'adverts'));
     }
 }
