@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Adverts;
 
 use App\Http\Requests\Admin\Adverts\AttributeRequest;
 use App\Http\Controllers\Controller;
-use App\Entity\Advert\Category;
+use App\Entity\Adverts\Category;
 
 class CategoryController extends Controller
 {

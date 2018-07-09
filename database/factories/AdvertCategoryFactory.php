@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Entity\Advert\Category::class, function (Faker $faker) {
+$factory->define(App\Entity\Adverts\Category::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->name,
         'slug' => $faker->unique()->slug(2),

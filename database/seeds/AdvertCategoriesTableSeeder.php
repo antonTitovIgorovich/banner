@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Entity\Advert\Category;
+use App\Entity\Adverts\Category;
 
 class AdvertCategoriesTableSeeder extends Seeder
 {

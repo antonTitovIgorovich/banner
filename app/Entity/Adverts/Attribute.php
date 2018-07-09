@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Advert;
+namespace App\Entity\Adverts;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,6 +40,11 @@ class Attribute extends Model
     public function isString(): bool
     {
         return $this->type === self::TYPE_STRING;
+    }
+
+    public function isNumber(): bool
+    {
+        return $this->isInteger() || $this->isFloat();
     }
 
     public function isInteger(): bool

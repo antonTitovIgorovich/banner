@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Advert;
+namespace App\Entity\Adverts;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
@@ -31,6 +31,9 @@ class Category extends Model
         return $this->parent ? $this->parent->allAttributes() : [];
     }
 
+    /**
+     * @return Attribute[]
+     */
     public function allAttributes(): array
     {
         return array_merge($this->parentAttributes(), $this->attributes()->orderBy('sort')->getModels());

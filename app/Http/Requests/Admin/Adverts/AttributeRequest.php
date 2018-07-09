@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Adverts;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Entity\Advert\Attribute;
+use App\Entity\Adverts\Attribute;
 
 
 class AttributeRequest extends FormRequest

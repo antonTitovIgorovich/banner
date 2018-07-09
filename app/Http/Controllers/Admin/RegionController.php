@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class RegionsController extends Controller
+class RegionController extends Controller
 {
 
     public function index()

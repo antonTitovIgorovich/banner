@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Entity\User;
+use Illuminate\Validation\Rule;
 
 /**
  * @property User $user
@@ -20,7 +21,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email|unique:users,id,' . $this->user->id
+            'email' => 'required|string|max:255|email|unique:users,id,' . $this->user->id,
+            'role' => ['required', 'string', Rule::in(array_keys(User::rolesList()))],
         ];
     }
 }

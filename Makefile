@@ -1,4 +1,4 @@
 test:
 	php vendor/bin/phpunit --colors=always
-a:
-	php artisan	
+migrate:
+	php artisan migrate && php artisan migrate --env=testing	
