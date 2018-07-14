@@ -16,7 +16,7 @@
                     <div class="col-md-3">
                         <ul class="list-unstyled">
                             @foreach ($chunk as $current)
-                                <li><a href="{{ route('adverts.index.all', $current) }}">{{ $current->name }}</a></li>
+                                <li><a href="{{ route('adverts.index', adverts_path(null, $current)) }}">{{ $current->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="col-md-3">
                         <ul class="list-unstyled">
                             @foreach ($chunk as $current)
-                                <li><a href="{{ route('adverts.index', [$current]) }}">{{ $current->name }}</a></li>
+                                <li><a href="{{ route('adverts.index', adverts_path($current, null)) }}">{{ $current->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -43,16 +43,5 @@
             </div>
         </div>
     </div>
-
-    @foreach($adverts as $advert)
-        <div class="card col-12">
-            <div class="card-body">
-                <h5 class="card-title">{{$advert->title}}</h5>
-                <h6 class="card-subtitle">{{$advert->price}}</h6>
-                <p class="card-text">{{str_limit($advert->content, 20)}}</p>
-                <a href="{{ route('adverts.show', $advert) }}" class="btn btn-primary">Show</a>
-            </div>
-        </div>
-    @endforeach
 
 @endsection

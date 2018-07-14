@@ -31,6 +31,11 @@ class Category extends Model
         return $this->parent ? $this->parent->allAttributes() : [];
     }
 
+    public function getPath(): string
+    {
+        return implode('/', array_merge($this->ancestors()->defaultOrder()->pluck('slug')->toArray(), [$this->slug]));
+    }
+
     /**
      * @return Attribute[]
      */

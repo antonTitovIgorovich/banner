@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +20,7 @@ Route::group([
     Route::get('/show/{advert}', 'AdvertController@show')->name('show');
     Route::post('/show/{advert}/phone', 'AdvertController@phone')->name('phone');
 
-    Route::get('/all/{category?}', 'AdvertController@index')->name('index.all');
-    Route::get('/{region?}/{category?}', 'AdvertController@index')->name('index');
+    Route::get('/{adverts_path?}', 'AdvertController@index')->name('index')->where('adverts_path', '.+');
 });
 
 Route::group(
