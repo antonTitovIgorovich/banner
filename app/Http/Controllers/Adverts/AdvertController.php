@@ -7,8 +7,6 @@ use App\Entity\Adverts\Category;
 use App\Entity\Region;
 use App\Http\Controllers\Controller;
 use App\Http\Router\AdvertsPath;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AdvertController extends Controller
