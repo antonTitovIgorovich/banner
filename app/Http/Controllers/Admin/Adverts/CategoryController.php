@@ -12,6 +12,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
+        $this->middleware('manage-adverts-categories');
         $this->categories = Category::defaultOrder()->withDepth()->get();
     }
 
