@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use App\Entity\Adverts\Advert\Advert;
 
 /**
  * @property int $id
@@ -202,5 +203,28 @@ class User extends Authenticatable
     public function hasFilledProfile(): bool
     {
         return !empty($this->name) && !empty($this->last_name) && $this->isPhoneVerified();
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Advert::class, 'advert_favorites', 'user_id', 'advert_id');
+    }
+
+    public function addToFavorites($advertId): void
+    {
+        if ($this->hasInFavorite($advertId)) {
+            throw new \DomainException('This advert is already added to favorites');
+        }
+        $this->favorites()->attach($advertId);
+    }
+
+    public function removeFromFavorites($advertId): void
+    {
+        $this->favorites()->detach($advertId);
+    }
+
+    public function hasInFavorite($id): bool
+    {
+        return $this->favorites()->where('id', $id)->exists();
     }
 }
