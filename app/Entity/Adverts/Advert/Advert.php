@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Photo[] $photos
  * @method Builder static active()
  * @method Builder forUser(User $user)
+ * @method Builder favoredByUser(User $user)
  */
 class Advert extends Model
 {
@@ -163,7 +164,7 @@ class Advert extends Model
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'advert_favorites', 'advert_id', 'user_id');
+        return $this->belongsToMany(User::class, 'adverts_favorites', 'advert_id', 'user_id');
     }
 
     public function scopeActive(Builder $query)

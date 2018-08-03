@@ -106,10 +106,11 @@
 
                 <script type='text/javascript'>
                     ymaps.ready(init);
-                    function init(){
+
+                    function init() {
                         var geocoder = new ymaps.geocode(
                             '{{ $advert->address }}',
-                            { results: 1 }
+                            {results: 1}
                         );
                         geocoder.then(
                             function (res) {
@@ -121,7 +122,7 @@
                                     controls: ['mapTools']
                                 });
                                 map.geoObjects.add(res.geoObjects.get(0));
-                                map.zoomRange.get(coord).then(function(range){
+                                map.zoomRange.get(coord).then(function (range) {
                                     map.setCenter(coord, range[1] - 1)
                                 });
                                 map.controls.add('mapTools')
@@ -135,10 +136,25 @@
 
             <p style="margin-bottom: 20px">Seller: {{ $advert->user->name }}</p>
 
-            <p>
-                <span class="btn btn-success"><span class="fa fa-envelope"></span> Send Message</span>
-                <span class="btn btn-primary phone-button" data-source="{{ route('adverts.phone', $advert) }}"><span class="fa fa-phone"></span> <span class="number">Show Phone Number</span></span>
-            </p>
+            <div class="d-flex flex-row mb-3">
+                <span class="btn btn-success mr-1"><span class="fa fa-envelope"></span> Send Message</span>
+                <span class="btn btn-primary phone-button mr-1"
+                      data-source="{{ route('adverts.phone', $advert) }}"><span class="fa fa-phone"></span> <span
+                            class="number">Show Phone Number</span></span>
+                @if ($user && $user->hasInFavorites($advert->id))
+                    <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-secondary"><span class="fa fa-star"></span> Remove from Favorites
+                        </button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
+                        @csrf
+                        <button class="btn btn-danger"><span class="fa fa-star"></span> Add to Favorites</button>
+                    </form>
+                @endif
+            </div>
 
             <hr/>
 
@@ -147,28 +163,40 @@
             <div class="row">
                 <div class="col-sm-6 col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt=""/>
+                        <img class="card-img-top"
+                             src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"
+                             alt=""/>
                         <div class="card-body">
                             <div class="card-title h4 mt-0" style="margin: 10px 0"><a href="#">The First Thing</a></div>
-                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas
+                                eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh
+                                ultricies vehicula ut id elit.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt=""/>
+                        <img class="card-img-top"
+                             src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"
+                             alt=""/>
                         <div class="card-body">
                             <div class="card-title h4 mt-0" style="margin: 10px 0"><a href="#">The First Thing</a></div>
-                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas
+                                eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh
+                                ultricies vehicula ut id elit.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt=""/>
+                        <img class="card-img-top"
+                             src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"
+                             alt=""/>
                         <div class="card-body">
                             <div class="card-title h4 mt-0" style="margin: 10px 0"><a href="#">The First Thing</a></div>
-                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p class="card-text" style="color: #666">Cras justo odio, dapibus ac facilisis in, egestas
+                                eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh
+                                ultricies vehicula ut id elit.</p>
                         </div>
                     </div>
                 </div>
