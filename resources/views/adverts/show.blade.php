@@ -105,6 +105,7 @@
                 @endforeach
                 </tbody>
             </table>
+
             <p>Address: {{ $advert->address }}</p>
 
             <div style="margin: 20px 0; border: 1px solid #ddd">
