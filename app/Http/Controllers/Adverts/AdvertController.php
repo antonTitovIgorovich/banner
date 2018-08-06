@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Adverts;
 
 use App\Entity\Adverts\Advert\Advert;
 use App\Entity\Adverts\Category;
+use Illuminate\Support\Facades\Auth;
 use App\Entity\Region;
 use App\Http\Controllers\Controller;
 use App\Http\Router\AdvertsPath;

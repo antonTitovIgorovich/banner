@@ -95,7 +95,16 @@
             <p>{!! nl2br(e($advert->content)) !!}</p>
 
             <hr/>
-
+            <table class="table table-bordered">
+                <tbody>
+                @foreach ($advert->category->allAttributes() as $attribute)
+                    <tr>
+                        <th>{{ $attribute->name }}</th>
+                        <td>{{ $advert->getValue($attribute->id) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
             <p>Address: {{ $advert->address }}</p>
 
             <div style="margin: 20px 0; border: 1px solid #ddd">
@@ -141,7 +150,7 @@
                 <span class="btn btn-primary phone-button mr-1"
                       data-source="{{ route('adverts.phone', $advert) }}"><span class="fa fa-phone"></span> <span
                             class="number">Show Phone Number</span></span>
-                @if ($user && $user->hasInFavorites($advert->id))
+                @if ($user && $user->hasInFavorite($advert->id))
                     <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
                         @csrf
                         @method('DELETE')
